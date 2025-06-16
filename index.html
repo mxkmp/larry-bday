@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Larry's Orientalisches Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🌙 Larry's Orientalisches Quiz ⭐</h1>
+            <p class="subtitle">Entdecke das Geheimnis der Bilder und Hinweise</p>
+        </header>
+
+        <main class="quiz-container">
+            <!-- Willkommensseite -->
+            <div id="welcome-screen" class="screen active">
+                <div class="welcome-content">
+                    <div class="ornament">✨ 🕌 ✨</div>
+                    <h2>Willkommen zum Quiz!</h2>
+                    <p>Ich zeige dir Bilder und Worte, die dir Hinweise auf ein besonderes Geheimnis geben. Dein Ziel ist es, herauszufinden, was diese Elemente verbindet und wohin sie dich führen könnten.</p>
+                    <button class="btn btn-primary" onclick="startQuiz()">Quiz starten 🚀</button>
+                </div>
+            </div>
+
+            <!-- Quiz-Bildschirm -->
+            <div id="quiz-screen" class="screen">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                    <span class="progress-text" id="progress-text">1 / 8</span>
+                </div>
+
+                <div class="image-container">
+                    <img id="quiz-image" src="" alt="Quiz Bild" class="quiz-image">
+                </div>
+
+                <div class="hint-container">
+                    <h3 id="hint-title" class="hint-title"></h3>
+                    <p id="hint-text" class="hint-text"></p>
+                </div>
+
+                <div class="navigation">
+                    <button id="prev-btn" class="btn btn-secondary" onclick="previousHint()" disabled>
+                        ← Zurück
+                    </button>
+                    <button id="next-btn" class="btn btn-primary" onclick="nextHint()">
+                        Weiter →
+                    </button>
+                    <button id="reveal-btn" class="btn btn-reveal" onclick="showReveal()" style="display: none;">
+                        🔍 Auflösung
+                    </button>
+                </div>
+            </div>
+
+            <!-- Auflösungsbildschirm -->
+            <div id="reveal-screen" class="screen">
+                <div class="reveal-content">
+                    <div class="ornament">🎉 ✨ 🎉</div>
+                    <h2>Die Auflösung!</h2>
+                    <div class="answer-box">
+                        <h3>Die Antwort ist:</h3>
+                        <div class="answer">🇲🇦 MAROKKO 🇲🇦</div>
+                    </div>
+                    <p>Alle Hinweise führten zu den wunderschönen und vielfältigen Landschaften und Kulturen Marokkos!</p>
+                    <div class="restart-section">
+                        <button class="btn btn-primary" onclick="restartQuiz()">Noch einmal spielen 🔄</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+/* Orientalisches Theme mit Mobile-First Design */
+:root {
+    --primary-gold: #d4af37;
+    --deep-blue: #1e3a8a;
+    --warm-orange: #f97316;
+    --desert-sand: #fef3c7;
+    --rich-purple: #7c3aed;
+    --emerald-green: #059669;
+    --text-dark: #1f2937;
+    --text-light: #f9fafb;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Scheherazade New', serif;
+    background: linear-gradient(135deg, var(--deep-blue) 0%, var(--rich-purple) 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+/* Orientalische Hintergrund-Dekoration */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(249, 115, 22, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+    z-index: -1;
+}
+
+.container {
+    max-width: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--primary-gold);
+}
+
+.title {
+    font-family: 'Amiri', serif;
+    font-size: 2rem;
+    color: var(--deep-blue);
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--text-dark);
+    opacity: 0.8;
+}
+
+/* Screen Management */
+.screen {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Welcome Screen */
+.welcome-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--primary-gold);
+}
+
+.ornament {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.welcome-content h2 {
+    font-family: 'Amiri', serif;
+    font-size: 1.8rem;
+    color: var(--deep-blue);
+    margin-bottom: 1rem;
+}
+
+.welcome-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+}
+
+/* Progress Bar */
+.progress-bar {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    height: 40px;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--primary-gold);
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, var(--primary-gold), var(--warm-orange));
+    height: 100%;
+    border-radius: 25px;
+    transition: width 0.5s ease;
+    width: 12.5%;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: var(--text-dark);
+    font-size: 1rem;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Image Container */
+.image-container {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.quiz-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: var(--shadow-lg);
+    border: 3px solid var(--primary-gold);
+    transition: transform 0.3s ease;
+}
+
+.quiz-image:hover {
+    transform: scale(1.02);
+}
+
+/* Hint Container */
+.hint-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--emerald-green);
+}
+
+.hint-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.5rem;
+    color: var(--deep-blue);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.hint-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+    text-align: justify;
+}
+
+/* Navigation */
+.navigation {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Scheherazade New', serif;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    box-shadow: var(--shadow);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-gold), var(--warm-orange));
+    color: white;
+    border: 2px solid var(--primary-gold);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--warm-orange), var(--primary-gold));
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--deep-blue);
+    border: 2px solid var(--deep-blue);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: var(--deep-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-reveal {
+    background: linear-gradient(135deg, var(--emerald-green), var(--rich-purple));
+    color: white;
+    border: 2px solid var(--emerald-green);
+    animation: pulse 2s infinite;
+}
+
+.btn-reveal:hover {
+    transform: translateY(-2px);
+    animation: none;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(5, 150, 105, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Reveal Screen */
+.reveal-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--primary-gold);
+}
+
+.reveal-content h2 {
+    font-family: 'Amiri', serif;
+    font-size: 2rem;
+    color: var(--deep-blue);
+    margin-bottom: 2rem;
+}
+
+.answer-box {
+    background: linear-gradient(135deg, var(--primary-gold), var(--warm-orange));
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    box-shadow: var(--shadow-lg);
+}
+
+.answer-box h3 {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.answer {
+    font-family: 'Amiri', serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+.reveal-content > p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+}
+
+.restart-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--primary-gold);
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .container {
+        max-width: 800px;
+        padding: 2rem;
+    }
+    
+    .title {
+        font-size: 3rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .welcome-content h2,
+    .reveal-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .answer {
+        font-size: 3rem;
+    }
+    
+    .hint-title {
+        font-size: 1.8rem;
+    }
+    
+    .hint-text {
+        font-size: 1.2rem;
+    }
+    
+    .navigation {
+        justify-content: space-between;
+    }
+    
+    .btn {
+        min-width: 160px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1000px;
+    }
+    
+    .quiz-image {
+        max-height: 400px;
+        width: auto;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+.btn:focus {
+    outline: 3px solid var(--primary-gold);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+    }
+}

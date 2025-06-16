@@ -316,6 +316,24 @@ body::before {
     margin-bottom: 2rem;
 }
 
+.birthday-message {
+    background: linear-gradient(135deg, var(--warm-orange), var(--primary-gold));
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    border: 3px solid var(--emerald-green);
+}
+
+.birthday-message p {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 0;
+}
+
 .restart-section {
     margin-top: 2rem;
     padding-top: 2rem;

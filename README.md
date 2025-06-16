@@ -1,11 +1,11 @@
-# 🌙 Larry's Orientalisches Quiz ⭐
+# 🌙 Larry's Quiz ⭐
 
-Ein interaktives, mobile-first Quiz mit orientalischem Design, das auf GitHub Pages gehostet werden kann.
+Ein interaktives, mobile-first Quiz mit schönem Design, das auf GitHub Pages gehostet werden kann.
 
 ## 📱 Features
 
 - **Mobile-First Design**: Optimiert für Smartphones und Tablets
-- **Orientalisches Theme**: Wunderschöne Farben und Schriftarten im orientalischen Stil
+- **Orientalisches Theme**: Wunderschöne Farben und Schriftarten
 - **Progressive Web App**: Service Worker für bessere Performance und Offline-Unterstützung
 - **Responsive Design**: Funktioniert perfekt auf allen Bildschirmgrößen
 - **Keyboard Navigation**: Vollständige Tastaturunterstützung
@@ -32,7 +32,7 @@ Ein interaktives, mobile-first Quiz mit orientalischem Design, das auf GitHub Pa
 ```
 larry-quiz/
 ├── index.html          # Haupt-HTML-Datei
-├── style.css           # Orientalisches CSS-Styling
+├── style.css           # Schönes CSS-Styling
 ├── script.js           # JavaScript-Logik
 ├── sw.js              # Service Worker
 ├── README.md          # Diese Dokumentation
@@ -51,10 +51,10 @@ larry-quiz/
 ## 🎨 Design-Features
 
 - **Farbschema**: Gold, Tiefblau, Warmes Orange, Lila und Smaragdgrün
-- **Schriftarten**: 'Amiri' und 'Scheherazade New' für authentischen orientalischen Look
+- **Schriftarten**: 'Amiri' und 'Scheherazade New' für authentischen Look
 - **Animationen**: Sanfte Übergänge und pulsierende Effekte
 - **Glasmorphismus**: Moderne transparente Effekte mit Backdrop-Blur
-- **Orientalische Ornamente**: Emojis und Symbole für authentische Atmosphäre
+- **Ornamente**: Emojis und Symbole für authentische Atmosphäre
 
 ## 🎯 Keyboard Shortcuts
 

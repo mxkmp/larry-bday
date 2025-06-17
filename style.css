@@ -1,3 +1,51 @@
+/* Login Overlay */
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(30, 58, 138, 0.5); /* halbtransparentes Dunkelblau */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(4px) grayscale(0.3);
+}
+.login-overlay:not(.active) {
+    display: none;
+}
+.login-box {
+    background: rgba(255,255,255,0.98);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    padding: 2.5rem 2rem 2rem 2rem;
+    text-align: center;
+    min-width: 280px;
+    border: 2px solid var(--primary-gold);
+}
+.login-box h2 {
+    font-family: 'Amiri', serif;
+    color: var(--deep-blue);
+    margin-bottom: 1rem;
+}
+.login-input {
+    width: 80%;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    border: 1.5px solid var(--primary-gold);
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+    outline: none;
+    text-align: center;
+}
+.login-error {
+    color: #b91c1c;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
 /* Orientalisches Theme mit Mobile-First Design */
 :root {
     --primary-gold: #d4af37;

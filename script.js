@@ -251,16 +251,45 @@ function preloadImages() {
 
 // Initialisierung
 document.addEventListener('DOMContentLoaded', function() {
-    // Preload alle Bilder
-    preloadImages();
-    
-    // Welcome Screen als Standard anzeigen
-    showScreen('welcome');
-    
-    // Service Worker registrieren für bessere Offline-Unterstützung
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js').catch(function(error) {
-            console.log('Service Worker Registrierung fehlgeschlagen:', error);
-        });
+    // Passwortschutz
+    const loginOverlay = document.getElementById('login-overlay');
+    const loginBtn = document.getElementById('login-btn');
+    const passwordInput = document.getElementById('password-input');
+    const loginError = document.getElementById('login-error');
+    const CORRECT_PASSWORD = '01082023';
+
+    function unlockQuiz() {
+        loginOverlay.classList.remove('active');
+        passwordInput.value = '';
+        loginError.style.display = 'none';
+        // Preload alle Bilder
+        preloadImages();
+        // Welcome Screen als Standard anzeigen
+        showScreen('welcome');
+        // Service Worker registrieren für bessere Offline-Unterstützung
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(function(error) {
+                console.log('Service Worker Registrierung fehlgeschlagen:', error);
+            });
+        }
     }
+
+    function checkPassword() {
+        if (passwordInput.value === CORRECT_PASSWORD) {
+            unlockQuiz();
+        } else {
+            loginError.style.display = 'block';
+            passwordInput.value = '';
+            passwordInput.focus();
+        }
+    }
+
+    loginBtn.addEventListener('click', checkPassword);
+    passwordInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            checkPassword();
+        }
+    });
+    // Autofocus beim Laden
+    passwordInput.focus();
 });

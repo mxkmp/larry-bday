@@ -8,6 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="login-overlay" class="login-overlay active">
+        <div class="login-box">
+            <h2>🔒 Geschützter Bereich</h2>
+            <p>Larry, bitte Jahrestag eingeben in DDMMYYYY:</p>
+            <input type="text" id="password-input" class="login-input" placeholder="Jahrestag" autocomplete="off">
+            <button class="btn btn-primary" id="login-btn">Login</button>
+            <div id="login-error" class="login-error" style="display:none;">Falsches Passwort!</div>
+        </div>
+    </div>
     <div class="container">
         <header class="header">
             <h1 class="title">🌙 Larry's Quiz ⭐</h1>

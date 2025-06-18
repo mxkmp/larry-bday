@@ -25,12 +25,12 @@
 
         <main class="quiz-container">
             <!-- Willkommensseite -->
-            <div id="welcome-screen" class="screen active">
+            <div id="welcome-screen" class="screen">
                 <div class="welcome-content">
                     <div class="ornament">✨ 🕌 ✨</div>
                     <h2>Willkommen zum Quiz!</h2>
                     <p>Ich zeige dir Bilder und Worte, die dir Hinweise auf ein besonderes Geheimnis geben. Dein Ziel ist es, herauszufinden, was diese Elemente verbindet und wohin sie dich führen könnten. Nimm dir einen Moment Zeit die Bilder auf dich wirken zu lassen und drücke dann auf weiter.</p>
-                    <button class="btn btn-primary" onclick="startQuiz()">Quiz starten 🚀</button>
+                    <button class="btn btn-primary" id="start-quiz-btn">Quiz starten 🚀</button>
                 </div>
             </div>
 
@@ -51,13 +51,13 @@
                 </div>
 
                 <div class="navigation">
-                    <button id="prev-btn" class="btn btn-secondary" onclick="previousHint()" disabled>
+                    <button id="prev-btn" class="btn btn-secondary" disabled>
                         ← Zurück
                     </button>
-                    <button id="next-btn" class="btn btn-primary" onclick="nextHint()">
+                    <button id="next-btn" class="btn btn-primary">
                         Weiter →
                     </button>
-                    <button id="reveal-btn" class="btn btn-reveal" onclick="showReveal()" style="display: none;">
+                    <button id="reveal-btn" class="btn btn-reveal" style="display: none;">
                         🔍 Auflösung
                     </button>
                 </div>
@@ -77,7 +77,7 @@
                         <p>🎂 Alles Gute zum 30. Larry :) Ich liebe dich über alles und schenke dir eine Reise nach Marokko! 💕</p>
                     </div>
                     <div class="restart-section">
-                        <button class="btn btn-primary" onclick="restartQuiz()">Noch einmal spielen 🔄</button>
+                        <button class="btn btn-primary" id="restart-quiz-btn">Noch einmal spielen 🔄</button>
                     </div>
                 </div>
             </div>

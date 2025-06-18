@@ -48,6 +48,7 @@ let currentScreen = 'welcome';
 let isTimerActive = false;
 let timerInterval = null;
 let pagesWithCompletedTimer = new Set(); // Track pages where timer has been completed
+let isLoggedIn = false; // Track login status
 
 // DOM Elemente
 const welcomeScreen = document.getElementById('welcome-screen');
@@ -61,24 +62,37 @@ const hintText = document.getElementById('hint-text');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const revealBtn = document.getElementById('reveal-btn');
+const startQuizBtn = document.getElementById('start-quiz-btn');
+const restartQuizBtn = document.getElementById('restart-quiz-btn');
 
 // Utility Funktionen
 function showScreen(screenName) {
+    console.log('Switching to screen:', screenName); // Debug output
+    
     // Alle Screens verstecken
-    welcomeScreen.classList.remove('active');
-    quizScreen.classList.remove('active');
-    revealScreen.classList.remove('active');
+    if (welcomeScreen) welcomeScreen.classList.remove('active');
+    if (quizScreen) quizScreen.classList.remove('active');
+    if (revealScreen) revealScreen.classList.remove('active');
     
     // Gewünschten Screen anzeigen
     switch(screenName) {
         case 'welcome':
-            welcomeScreen.classList.add('active');
+            if (welcomeScreen) {
+                welcomeScreen.classList.add('active');
+                console.log('Welcome screen activated');
+            }
             break;
         case 'quiz':
-            quizScreen.classList.add('active');
+            if (quizScreen) {
+                quizScreen.classList.add('active');
+                console.log('Quiz screen activated');
+            }
             break;
         case 'reveal':
-            revealScreen.classList.add('active');
+            if (revealScreen) {
+                revealScreen.classList.add('active');
+                console.log('Reveal screen activated');
+            }
             break;
     }
     
@@ -170,6 +184,8 @@ function displayCurrentHint() {
 
 // Event Handler
 function startQuiz() {
+    if (!isLoggedIn) return; // Prevent starting quiz if not logged in
+    
     currentHintIndex = 0;
     showScreen('quiz');
     displayCurrentHint();
@@ -181,6 +197,8 @@ function startQuiz() {
 }
 
 function nextHint() {
+    if (!isLoggedIn) return; // Prevent navigation if not logged in
+    
     if (currentHintIndex < quizData.length - 1) {
         currentHintIndex++;
         displayCurrentHint();
@@ -196,6 +214,8 @@ function nextHint() {
 }
 
 function previousHint() {
+    if (!isLoggedIn) return; // Prevent navigation if not logged in
+    
     if (currentHintIndex > 0) {
         // Clear timer when going back
         clearTimer();
@@ -209,6 +229,8 @@ function previousHint() {
 }
 
 function showReveal() {
+    if (!isLoggedIn) return; // Prevent access if not logged in
+    
     showScreen('reveal');
     
     // Smooth scroll to top für bessere UX
@@ -216,6 +238,8 @@ function showReveal() {
 }
 
 function restartQuiz() {
+    if (!isLoggedIn) return; // Prevent restart if not logged in
+    
     currentHintIndex = 0;
     clearTimer(); // Clear any active timer
     pagesWithCompletedTimer.clear(); // Reset timer completion tracking
@@ -227,6 +251,9 @@ function restartQuiz() {
 
 // Keyboard Navigation
 document.addEventListener('keydown', function(event) {
+    // Block all keyboard navigation if not logged in
+    if (!isLoggedIn) return;
+    
     if (currentScreen === 'quiz') {
         switch(event.key) {
             case 'ArrowRight':
@@ -273,6 +300,9 @@ document.addEventListener('touchstart', function(event) {
 });
 
 document.addEventListener('touchend', function(event) {
+    // Block touch navigation if not logged in
+    if (!isLoggedIn) return;
+    
     if (currentScreen !== 'quiz') return;
     
     const endX = event.changedTouches[0].clientX;
@@ -330,13 +360,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const CORRECT_PASSWORD = '01082023';
 
     function unlockQuiz() {
+        isLoggedIn = true; // Set login status
         loginOverlay.classList.remove('active');
         passwordInput.value = '';
         loginError.style.display = 'none';
         // Preload alle Bilder
         preloadImages();
-        // Welcome Screen als Standard anzeigen
-        showScreen('welcome');
+        // Welcome Screen als Standard anzeigen - mit Verzögerung um sicherzustellen dass DOM bereit ist
+        setTimeout(() => {
+            showScreen('welcome');
+        }, 100);
         // Service Worker registrieren für bessere Offline-Unterstützung
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').catch(function(error) {
@@ -363,4 +396,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     // Autofocus beim Laden
     passwordInput.focus();
+    
+    // Add event listeners for quiz buttons
+    if (startQuizBtn) startQuizBtn.addEventListener('click', function() {
+        if (isLoggedIn) startQuiz();
+    });
+    if (prevBtn) prevBtn.addEventListener('click', function() {
+        if (isLoggedIn) previousHint();
+    });
+    if (nextBtn) nextBtn.addEventListener('click', function() {
+        if (isLoggedIn) nextHint();
+    });
+    if (revealBtn) revealBtn.addEventListener('click', function() {
+        if (isLoggedIn) showReveal();
+    });
+    if (restartQuizBtn) restartQuizBtn.addEventListener('click', function() {
+        if (isLoggedIn) restartQuiz();
+    });
 });

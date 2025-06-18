@@ -45,6 +45,9 @@ const quizData = [
 // Globale Variablen
 let currentHintIndex = 0;
 let currentScreen = 'welcome';
+let isTimerActive = false;
+let timerInterval = null;
+let pagesWithCompletedTimer = new Set(); // Track pages where timer has been completed
 
 // DOM Elemente
 const welcomeScreen = document.getElementById('welcome-screen');
@@ -99,11 +102,51 @@ function updateNavigationButtons() {
     } else {
         nextBtn.style.display = 'inline-flex';
         revealBtn.style.display = 'none';
+        // Reset next button text when showing it
+        if (!isTimerActive) {
+            nextBtn.textContent = 'Weiter →';
+        }
     }
+}
+
+function startTimer() {
+    let timeLeft = 10;
+    isTimerActive = true;
+    nextBtn.disabled = true;
+    
+    // Update button text immediately
+    nextBtn.textContent = `Weiter → (${timeLeft}s)`;
+    
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        nextBtn.textContent = `Weiter → (${timeLeft}s)`;
+        
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            isTimerActive = false;
+            nextBtn.disabled = false;
+            nextBtn.textContent = 'Weiter →';
+            // Mark this page as having completed timer
+            pagesWithCompletedTimer.add(currentHintIndex);
+        }
+    }, 1000);
+}
+
+function clearTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+    isTimerActive = false;
+    nextBtn.disabled = false;
+    nextBtn.textContent = 'Weiter →';
 }
 
 function displayCurrentHint() {
     const currentHint = quizData[currentHintIndex];
+    
+    // Clear any existing timer
+    clearTimer();
     
     // Bild laden
     quizImage.src = currentHint.image;
@@ -116,6 +159,13 @@ function displayCurrentHint() {
     // Progress und Navigation aktualisieren
     updateProgress();
     updateNavigationButtons();
+    
+    // Check if this page has already completed its timer
+    // If so, don't start a new timer when navigating back to it
+    if (pagesWithCompletedTimer.has(currentHintIndex)) {
+        nextBtn.disabled = false;
+        nextBtn.textContent = 'Weiter →';
+    }
 }
 
 // Event Handler
@@ -123,12 +173,22 @@ function startQuiz() {
     currentHintIndex = 0;
     showScreen('quiz');
     displayCurrentHint();
+    
+    // Start timer on the first page as well
+    if (!pagesWithCompletedTimer.has(currentHintIndex)) {
+        startTimer();
+    }
 }
 
 function nextHint() {
     if (currentHintIndex < quizData.length - 1) {
         currentHintIndex++;
         displayCurrentHint();
+        
+        // Only start timer if this page hasn't completed its timer yet
+        if (!pagesWithCompletedTimer.has(currentHintIndex)) {
+            startTimer();
+        }
         
         // Smooth scroll to top für bessere UX
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -137,6 +197,9 @@ function nextHint() {
 
 function previousHint() {
     if (currentHintIndex > 0) {
+        // Clear timer when going back
+        clearTimer();
+        
         currentHintIndex--;
         displayCurrentHint();
         
@@ -154,6 +217,8 @@ function showReveal() {
 
 function restartQuiz() {
     currentHintIndex = 0;
+    clearTimer(); // Clear any active timer
+    pagesWithCompletedTimer.clear(); // Reset timer completion tracking
     showScreen('welcome');
     
     // Smooth scroll to top für bessere UX
@@ -170,7 +235,10 @@ document.addEventListener('keydown', function(event) {
                 if (currentHintIndex === quizData.length - 1) {
                     showReveal();
                 } else {
-                    nextHint();
+                    // Only allow next hint if timer is not active or button is not disabled
+                    if (!isTimerActive && !nextBtn.disabled) {
+                        nextHint();
+                    }
                 }
                 break;
             case 'ArrowLeft':
@@ -223,7 +291,10 @@ document.addEventListener('touchend', function(event) {
             if (currentHintIndex === quizData.length - 1) {
                 showReveal();
             } else {
-                nextHint();
+                // Only allow next hint if timer is not active or button is not disabled
+                if (!isTimerActive && !nextBtn.disabled) {
+                    nextHint();
+                }
             }
         }
     }

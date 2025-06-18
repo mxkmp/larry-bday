@@ -64,6 +64,7 @@ const nextBtn = document.getElementById('next-btn');
 const revealBtn = document.getElementById('reveal-btn');
 const startQuizBtn = document.getElementById('start-quiz-btn');
 const restartQuizBtn = document.getElementById('restart-quiz-btn');
+const homeBtn = document.getElementById('home-btn');
 
 // Utility Funktionen
 function showScreen(screenName) {
@@ -249,6 +250,19 @@ function restartQuiz() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function goToHome() {
+    if (!isLoggedIn) return; // Prevent navigation if not logged in
+    
+    // Clear any active timer
+    clearTimer();
+    
+    // Go back to welcome screen
+    showScreen('welcome');
+    
+    // Smooth scroll to top for better UX
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 // Keyboard Navigation
 document.addEventListener('keydown', function(event) {
     // Block all keyboard navigation if not logged in
@@ -273,8 +287,9 @@ document.addEventListener('keydown', function(event) {
                 previousHint();
                 break;
             case 'Escape':
+            case 'Home':
                 event.preventDefault();
-                restartQuiz();
+                goToHome();
                 break;
         }
     } else if (currentScreen === 'welcome') {
@@ -412,5 +427,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     if (restartQuizBtn) restartQuizBtn.addEventListener('click', function() {
         if (isLoggedIn) restartQuiz();
+    });
+    if (homeBtn) homeBtn.addEventListener('click', function() {
+        if (isLoggedIn) goToHome();
     });
 });

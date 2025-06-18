@@ -388,6 +388,36 @@ body::before {
     border-top: 2px solid var(--primary-gold);
 }
 
+/* Quiz Header Layout */
+.quiz-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.quiz-header .progress-bar {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* Home Button */
+.btn-home {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--deep-blue);
+    border: 2px solid var(--primary-gold);
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+    min-width: auto;
+    flex-shrink: 0;
+}
+
+.btn-home:hover:not(:disabled) {
+    background: var(--primary-gold);
+    color: white;
+    transform: translateY(-1px);
+}
+
 /* Responsive Design */
 @media (min-width: 768px) {
     .container {
@@ -395,38 +425,13 @@ body::before {
         padding: 2rem;
     }
     
-    .title {
-        font-size: 3rem;
+    .quiz-header {
+        gap: 1.5rem;
     }
     
-    .subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .welcome-content h2,
-    .reveal-content h2 {
-        font-size: 2.5rem;
-    }
-    
-    .answer {
-        font-size: 3rem;
-    }
-    
-    .hint-title {
-        font-size: 1.8rem;
-    }
-    
-    .hint-text {
-        font-size: 1.2rem;
-    }
-    
-    .navigation {
-        justify-content: space-between;
-    }
-    
-    .btn {
-        min-width: 160px;
-        font-size: 1.1rem;
+    .btn-home {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
     }
 }
 
